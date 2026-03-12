@@ -1,0 +1,48 @@
+#ihk-logo {
+    padding: 1em;
+    margin: 1em;
+}
+
+table {
+    border-spacing: 1em;
+}
+
+td, th {
+    padding: 1em;
+}
+
+body {
+    font-family: Arial;
+    font-size: 1vw;
+}
+
+#page-number {
+    position: absolute;
+    right: 10vw;
+}
+
+#details-personals {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#details-personals td {
+    border: 1px solid;
+}
+
+#hours {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+#hours td {
+    border: 1px solid;
+}
+
+#hours th {
+    border: 1px solid;
+}
+
+#ausbildungsnachweise div {
+    margin: 1em;
+}
