@@ -6,13 +6,18 @@
         <link rel="stylesheet" href="widget-style.css">
     </head>
     <body>
-        <h1>
-            Ausbildungsnachweis-Tracker
-        </h1>
-        <div id="daterange">
-            <p><!--Onclick select dates?-->
-                05.03.2026-09.03.2026
-            </p>
+        <div id="main-details">
+            <h1>
+                Ausbildungsnachweis-Tracker
+            </h1>
+            <div id="daterange">
+                <p id="badge-kw">
+                    KW 11
+                </p>
+                <p>
+                    09.03.2026 - 13.03.2026
+                </p>
+            </div>
         </div>
         <div id="ui-box">
             <div>
@@ -20,13 +25,17 @@
                     Tag zurück
                 </button>
             </div>
-            <div id="activities-input">
-                <textarea id="activities-text" rows="5" cols="20">
-                </textarea>
-                <input id="time-input-1" type="number">
-                <button type="button">+</button> 
-            </div>
-            <div id="activities-times-input">
+            <div id="activities-input-with-save">
+                <div id="activities-input-list">
+                    <div id="activities-input">
+                        <textarea rows="3" cols="20" placeholder="Aktivität"></textarea>
+                        <textarea rows="3" cols="20" placeholder="Zeitdauer"></textarea>
+                        <button type="button" onclick="addNewEntry()">+</button> 
+                    </div>
+                </div>
+                <div id="save-day">
+                    <button type="button">✓ Änderungen Speichern</button>
+                </div>
             </div>
             <div>
                 <button type="button">
@@ -34,5 +43,6 @@
                 </button>
             </div>
         </div>
+        <script src="index.js"></script>
     </body>
 </htmL>
