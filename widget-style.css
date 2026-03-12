@@ -12,6 +12,7 @@
 
 #activities-input {
     display: flex;
+    flex-direction: column;
 }
 
 #activities-input * {
@@ -20,12 +21,7 @@
 
 html {
     font-family: Arial;
-    font-size: 2rem;
 }
-/*
-button, textarea {
-    font-size: 2rem;
-}*/
 
 
 #main-details {
