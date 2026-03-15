@@ -19,12 +19,19 @@ function addNewEntry() {
 // generateDateRange: generate the workdays 
 // range for a given calendar week.
 function generateDateRange(calendarWeek, year) {
-    // Calculate the last day of the year
-    // which is in this calendar week.
+    // Calculate the beginning of the given calendar week.
     const lastDay = (calendarWeek - 1) * 7;
+    // Calculate the number of milliseconds from the beginning of the year
+    // (e.g. 01-01-2026) to the start of the calendar week.
     const millisecondsElapsedSinceYearBegan = lastDay * 24 * 60 * 60 * 1000;
+    // Calculate the number of milliseconds 
+    // from the EPOCH to the beginning
+    // of the first calendar week of the
+    // given year.
     const millisecondsNewYear = new Date(`${year}`);
     const day = millisecondsNewYear.getDay();
+    // Set the time to be the Monday of the first week of the year,
+    // since this is the start of the first calendar week.
     if(day != 1) {
         let isDay = millisecondsNewYear.getDay();
         while (isDay != 1) {
@@ -44,5 +51,49 @@ function generateDateRange(calendarWeek, year) {
     return `${startDate} - ${endDateStr}`;
 }
 
-console.log(generateDateRange(32, "2026"));
-console.log(generateDateRange(15, "2026"));
+// setKWFromQuery: set the current Kalenderwoche 
+// based on the value in the query string.
+function setKWFromQuery() {
+    // get the value in the query.
+    const paramsString = window.location.search;
+    const searchParams = new URLSearchParams(paramsString);
+    const kw = searchParams.get("kw");
+    if(kw == null) {
+        return null;
+    }
+    document.querySelector("#badge-kw").innerText = `KW ${kw}`;
+    document.querySelector("#daterange-current").innerText = generateDateRange(Number(kw), "2026");
+    return kw;
+}
+
+// setSelectKWs: setup the previous and next Kalenderwoche 
+// date ranges (for the user to select them if needed).
+// - kw_int: kalenderwoche integer
+function setSelectKWs(kw_int) {
+    kw_previous = kw_int - 1;
+    document.querySelector("#badge-kw-previous").innerText = `KW ${kw_previous}`;
+    document.querySelector("#daterange-previous").innerText = generateDateRange(kw_previous, "2026");
+    kw_next = kw_int + 1;
+    document.querySelector("#badge-kw-next").innerText = `KW ${kw_next}`;
+    document.querySelector("#daterange-next").innerText = generateDateRange(kw_next, "2026");
+}
+
+// toggleSelectKWs: close / open the selection menu
+// for selecting different kalenderwochen.
+function toggleSelectKWs() {
+    document.querySelector("#dateranges-select").classList.toggle("hidden");
+    if(document.querySelector("#dateranges-select").classList.contains("hidden")) {
+        document.querySelector("#dropdown-icon").classList = "fa-solid fa-arrow-down";
+    } else {
+        document.querySelector("#dropdown-icon").classList = "fa-solid fa-arrow-up";
+    }
+}
+
+function setup() {
+    const kw = setKWFromQuery();
+    if(kw != null) {
+        setSelectKWs(Number(kw));
+    }
+}
+
+setup();

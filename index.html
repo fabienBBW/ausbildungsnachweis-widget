@@ -4,6 +4,7 @@
             Ausbildungsnachweis-Widget
         </title>
         <link rel="stylesheet" href="widget-style.css">
+        <script src="https://kit.fontawesome.com/aad781c8f2.js" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -11,13 +12,34 @@
             <h1>
                 Ausbildungsnachweis-Tracker
             </h1>
-            <div id="daterange">
-                <p id="badge-kw">
-                    KW 11
-                </p>
+            <div class="daterange" id="open-dropdown" onclick="toggleSelectKWs()">
                 <p>
-                    09.03.2026 - 13.03.2026
+                <i id="dropdown-icon" class="fa-solid fa-arrow-down"></i>
                 </p>
+                <p id="badge-kw" class="badge-kw">
+                 
+                </p>
+                <p id="daterange-current">
+                   
+                </p>
+            </div>
+            <div id="dateranges-select" class="hidden">
+                <div class="daterange select">
+                    <p id="badge-kw-previous" class="badge-kw">
+
+                    </p>
+                    <p id="daterange-previous">
+
+                    </p>
+                </div>
+                <div class="daterange select">
+                    <p id="badge-kw-next" class="badge-kw">
+
+                    </p>
+                    <p id="daterange-next">
+
+                    </p>
+                </div>
             </div>
         </div>
         <div id="ui-box">
@@ -46,4 +68,4 @@
         </div>
         <script src="index.js"></script>
     </body>
-</htmL>
+</html>

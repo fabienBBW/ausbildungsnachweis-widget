@@ -21,6 +21,7 @@
 
 html {
     font-family: Arial;
+    background: #e7eaf6;
 }
 
 
@@ -38,17 +39,48 @@ html {
     justify-content: center;
 }
 
-#daterange {
+.daterange {
     display: flex;
     flex-direction: row;
-}
-
-#daterange p {
+    border: 2px solid #a2a8d3;
+    border-radius: 20px;
     margin: 1em;
 }
 
-#badge-kw {
-    background-color: #333;
+.daterange.select {
+    text-decoration: underline dotted #38598b 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.daterange:hover {
+    background-color: #38598b;
     color: white;
-    border: 5px solid blue;
+    cursor: pointer;
+}
+
+button {
+    background: none;
+    border: 2px solid #a2a8d3;
+    border-radius: 20px;
+    margin: 1em;
+    padding: 1em;
+}
+
+button:hover {
+    background-color: #38598b;
+    color: white;
+    cursor: pointer;
+}
+
+.daterange p {
+    margin: 1em;
+}
+
+.badge-kw {
+    border: 5px solid #a2a8d3;
+    border-radius: 20px;
+    padding: 0.5em;
 }
