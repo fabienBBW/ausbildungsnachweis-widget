@@ -9,7 +9,10 @@
         <h1>PHP ADMIN MySQL SEED DBs with necessary tables</h1>
         <ul>
             <li>
-                ?create_table=days -> Create table days (holds activity information for a day).
+                seed_db.php?create_table=days -> Create table days (holds activity information for a day).
+            </li>
+            <li>
+                seed_db.php?create_table=weeks -> Create table weeks.
             </li>
         </ul>
 <?php 
@@ -32,7 +35,29 @@ function createTableDay($pdo) {
         if ($return_val === false) {
             echo "Error creating table.";
         }
-        echo "Created table days. Return value: " . strval($return_val);
+        echo "<br />Created table days. Return value: " . strval($return_val);
+    } catch(PDOException $e) {
+        echo "Error creating table: " . $sql . "<br>" . $e->getMessage();
+    }
+}
+
+// createTableWeek: create the table
+// which will hold the days.
+// |week_id|days_ids_json|week_cw
+// days_ids_json: [5, 6, 7]
+// week_cw: calendar week.
+function createTableWeek($pdo) {
+    try {
+        $sql = "CREATE TABLE IF NOT EXISTS weeks (
+            week_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            days_ids_json JSON,
+            week_cw INT UNSIGNED NOT NULL
+        );";
+        $return_val = $pdo->exec($sql);
+        if ($return_val === false) {
+            echo "Error creating table.";
+        }
+        echo "<br />Created table weeks. Return value: " . strval($return_val);
     } catch(PDOException $e) {
         echo "Error creating table: " . $sql . "<br>" . $e->getMessage();
     }
@@ -42,6 +67,9 @@ if(isset($_GET['create_table'])) {
     echo "<br /> create_table param = " . $_GET["create_table"] . "<br />";
     if($_GET['create_table'] == "days") {
         createTableDay($pdo);
+    }
+    if($_GET["create_table"] == "weeks") {
+        createTableWeek($pdo);
     }
 }
 ?>
