@@ -1,0 +1,1 @@
+Copy-Item -Path "../../ausbildungsnachweis-widget" -Destination C:/xampp/htdocs -Recurse -Force

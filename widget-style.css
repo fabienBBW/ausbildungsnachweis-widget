@@ -39,6 +39,14 @@ html {
     justify-content: center;
 }
 
+.daterange-custom {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #a2a8d3;
+    border-radius: 20px;
+    margin: 1em;
+}
+
 .daterange {
     display: flex;
     flex-direction: row;
@@ -48,7 +56,7 @@ html {
 }
 
 .daterange.select {
-    text-decoration: underline dotted #38598b 2px;
+    text-decoration: underline dotted #38598b 1px;
 }
 
 .hidden {
@@ -75,7 +83,7 @@ button:hover {
     cursor: pointer;
 }
 
-.daterange p {
+.daterange > *, .daterange-custom > * {
     margin: 1em;
 }
 
@@ -83,4 +91,8 @@ button:hover {
     border: 5px solid #a2a8d3;
     border-radius: 20px;
     padding: 0.5em;
+}
+
+#input-custom-kw {
+    margin: 1em;
 }
