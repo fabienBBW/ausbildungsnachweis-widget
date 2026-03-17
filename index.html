@@ -3,9 +3,14 @@
         <title>
             Ausbildungsnachweis-Widget
         </title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="widget-style.css">
         <script src="https://kit.fontawesome.com/aad781c8f2.js" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--easyMDE markdown editor-->
+        <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+        <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     </head>
     <body>
         <div id="main-details">
@@ -51,20 +56,16 @@
                 </div>
             </div>
         </div>
-        <div id="ui-box">
+        <div class="ui-box">
             <div>
                 <button type="button">
                     Tag zurück
                 </button>
             </div>
+        </div>
+        <textarea placeholder="Hier können Sie Ihre Aktivitäten eingeben... mit Markdown" id="activities-edit"></textarea>
+        <div class="ui-box">
             <div id="activities-input-with-save">
-                <div id="activities-input-list">
-                    <div id="activities-input">
-                        <textarea rows="3" cols="20" placeholder="Aktivität"></textarea>
-                        <textarea rows="3" cols="20" placeholder="Zeitdauer"></textarea>
-                        <button type="button" onclick="addNewEntry()">+</button> 
-                    </div>
-                </div>
                 <div id="save-day">
                     <button type="button">✓ Änderungen Speichern</button>
                 </div>

@@ -94,6 +94,9 @@ function setup() {
     if(kw != null) {
         setSelectKWs(Number(kw));
     }
+
+    // Setup Markdown editor (easyMDE)
+    const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
 }
 
 setup();
