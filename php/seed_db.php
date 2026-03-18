@@ -22,14 +22,16 @@ require_once("./config.php");
 
 // createTableDay: create the table 
 // which will hold the activity information for a day.
-// |day_id|day_date|day_activities_json
+// |day_id|day_date|day_activities_json|day_cw
 // day_activities_json: [["Tipp 10 (Lektion 10)", 0.5], ["IT-News", 1.0]]
+// day_cw: calendar week the day is in
 function createTableDay($pdo) {
     try {
         $sql = "CREATE TABLE IF NOT EXISTS days (
             day_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             day_date BIGINT UNSIGNED NOT NULL,
-            day_activities_json JSON NOT NULL
+            day_activities_json JSON NOT NULL,
+            day_cw INT UNSIGNED NOT NULL
         );";
         $return_val = $pdo->exec($sql);
         if ($return_val === false) {

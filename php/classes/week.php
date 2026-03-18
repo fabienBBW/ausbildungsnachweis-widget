@@ -14,7 +14,7 @@ class Week {
     }
 
     public static function fromCW(int $week_cw) {
-        require("config.php");
+        require("../config.php");
         $stmt = $pdo->prepare("SELECT * FROM weeks WHERE week_cw = ?");
         $stmt->execute([$week_cw]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -23,7 +23,24 @@ class Week {
     }
 
     public function save() {
-        require("config.php");
+        require("../config.php");
+        $week_cw = $this->week_cw;
+        if($this->fromCW($week_cw) == false) {
+            // completely new week object.
+            $stmt = $pdo->prepare("INSERT INTO weeks (week_id, days_ids_json, week_cw) VALUES (?, ?, ?)");
+            $ret_val = $stmt->execute([$this->week_id, $this->days_ids_json, $this->week_cw]);
+            if($ret_val == false) {
+                return false;
+            }
+            return true;
+        } else {
+            $stmt = $pdo->prepare("UPDATE weeks SET days_ids_json = ?, week_cw = ? WHERE week_id = ?");
+            $ret_val = $stmt->execute([$this->days_ids_json, $this->week_cw, $this->week_id]);
+            if($ret_val == false) {
+                return false;
+            }
+            return true;
+        }
     }
 }
 ?>
