@@ -54,9 +54,10 @@ function generateDateRange(calendarWeek, year) {
 function getCWForTimestamp(currentTime) {
     const newYearDate = new Date(`${currentTime.getFullYear()}`);
     let isDay = newYearDate.getDay();
+    console.log(`${isDay}: ${currentTime.getDay()}`)
     if(isDay != currentTime.getDay()) {
         while(isDay != currentTime.getDay()) {
-            if(day > currentTime.getDay()) {
+            if(isDay > currentTime.getDay()) {
                 newYearDate.setHours(newYearDate.getHours() - 24);
                 isDay = newYearDate.getDay();
             } else {
@@ -66,6 +67,15 @@ function getCWForTimestamp(currentTime) {
             console.log(`${isDay}: ${currentTime.getDay()}`)
         }
     }
+    let newYearCurrentDate = `${newYearDate.getFullYear()}-${newYearDate.getMonth()}-${newYearDate.getDate()}`;
+    let timestampDate = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()}`;
+    let cw = 1;
+    console.log(`${newYearCurrentDate}: ${timestampDate}`);
+    while(newYearCurrentDate != timestampDate) {
+        newYearDate.setDate(newYearDate.getDate() + 7)
+        cw += 1;
+    }
+    return cw;
 }
 
 // setKWFromQuery: set the current Kalenderwoche 
@@ -117,3 +127,8 @@ function setup() {
 }
 
 setup();
+
+function test() {
+    let date = new Date("2026-03-18");
+    const cw = getCWForTimestamp(date);
+}
