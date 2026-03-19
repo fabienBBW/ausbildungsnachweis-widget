@@ -29,7 +29,7 @@ class Day {
     public function save() {
         require("../config.php");
         $day_id = $this->day_id;
-        if($this->fromId($day_id) == false) {
+        if($day_id == null || $this->fromId($day_id) == false) {
             // completely new day object.
             $stmt = $pdo->prepare("INSERT INTO days (day_id, day_date, day_activities_json, day_cw) VALUES(?, ?, ?, ?)");
             $ret_val = $stmt->execute([$this->day_id, $this->day_date, $this->day_activities_json, $this->day_cw]);
