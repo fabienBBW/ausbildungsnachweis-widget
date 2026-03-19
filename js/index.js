@@ -54,7 +54,7 @@ function generateDateRange(calendarWeek, year) {
 function getCWForTimestamp(currentTime) {
     const newYearDate = new Date(`${currentTime.getFullYear()}`);
     let isDay = newYearDate.getDay();
-    console.log(`${isDay}: ${currentTime.getDay()}`)
+    //console.log(`${isDay}: ${currentTime.getDay()}`)
     if(isDay != currentTime.getDay()) {
         while(isDay != currentTime.getDay()) {
             if(isDay > currentTime.getDay()) {
@@ -64,16 +64,18 @@ function getCWForTimestamp(currentTime) {
                 newYearDate.setHours(newYearDate.getHours() + 24);
                 isDay = newYearDate.getDay();
             }
-            console.log(`${isDay}: ${currentTime.getDay()}`)
+            //console.log(`${isDay}: ${currentTime.getDay()}`)
         }
     }
     let newYearCurrentDate = `${newYearDate.getFullYear()}-${newYearDate.getMonth()}-${newYearDate.getDate()}`;
     let timestampDate = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()}`;
     let cw = 1;
-    console.log(`${newYearCurrentDate}: ${timestampDate}`);
+    //console.log(`${newYearCurrentDate}: ${timestampDate}`);
     while(newYearCurrentDate != timestampDate) {
         newYearDate.setDate(newYearDate.getDate() + 7)
         cw += 1;
+        //console.log(`${newYearCurrentDate}: ${timestampDate}`);
+        newYearCurrentDate = `${newYearDate.getFullYear()}-${newYearDate.getMonth()}-${newYearDate.getDate()}`;
     }
     return cw;
 }
@@ -116,10 +118,37 @@ function toggleSelectKWs() {
     }
 }
 
+function setCurrentDay(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const dateStr = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+    document.querySelector("#current-day").innerHTML = `<h3>${dateStr}</h3>`
+}
+
 function setup() {
+    // Set default calendar week if not set.
+    const searchParams = new URLSearchParams(window.location.search);
+    if(!(searchParams.has("kw"))) {
+        const date = new Date();
+        const cw = getCWForTimestamp(date);
+        searchParams.append("kw", cw.toString());
+        window.location.search = searchParams.toString();
+    }
     const kw = setKWFromQuery();
     if(kw != null) {
         setSelectKWs(Number(kw));
+    }
+
+    // Set day to current day if not set.
+    if(!(searchParams.has("day"))) {
+        const timestamp = Date.now();
+        const timestampSeconds = Math.floor(timestamp / 1000);
+        searchParams.append("day", timestampSeconds.toString());
+        window.location.search = searchParams.toString();
+    }
+    // Set day in the UI based on params.
+    const day = searchParams.get("day");
+    if(day != null) {
+        setCurrentDay(day);
     }
 
     // Setup Markdown editor (easyMDE)
@@ -131,4 +160,9 @@ setup();
 function test() {
     let date = new Date("2026-03-18");
     const cw = getCWForTimestamp(date);
+    console.log(cw);
+
+    let date2 = new Date("2026-04-10");
+    const cw2 = getCWForTimestamp(date2);
+    console.log(cw2);
 }
