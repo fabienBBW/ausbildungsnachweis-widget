@@ -51,6 +51,23 @@ function generateDateRange(calendarWeek, year) {
     return `${startDate} - ${endDateStr}`;
 }
 
+function getCWForTimestamp(currentTime) {
+    const newYearDate = new Date(`${currentTime.getFullYear()}`);
+    let isDay = newYearDate.getDay();
+    if(isDay != currentTime.getDay()) {
+        while(isDay != currentTime.getDay()) {
+            if(day > currentTime.getDay()) {
+                newYearDate.setHours(newYearDate.getHours() - 24);
+                isDay = newYearDate.getDay();
+            } else {
+                newYearDate.setHours(newYearDate.getHours() + 24);
+                isDay = newYearDate.getDay();
+            }
+            console.log(`${isDay}: ${currentTime.getDay()}`)
+        }
+    }
+}
+
 // setKWFromQuery: set the current Kalenderwoche 
 // based on the value in the query string.
 function setKWFromQuery() {
