@@ -127,3 +127,7 @@ html {
     margin: 0.5em;
     padding: 0.5em;
 }
+
+.day-select {
+    text-decoration: underline dotted #38598b 1px;
+}

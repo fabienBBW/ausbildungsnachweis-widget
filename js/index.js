@@ -124,6 +124,25 @@ function setCurrentDay(timestamp) {
     document.querySelector("#current-day-text").innerText = `${dateStr}`
 }
 
+function generateChoiceDays(CW) {
+    const days = generateDateRange(CW, "2026");
+    const startDay = days.substring(0, 2);
+    const endDay = days.substring(days.indexOf("- ") + 2, days.indexOf("- ") + 4);
+    const daysGen = [];
+    console.log(`${startDay} ${endDay}`);
+    for(let i = startDay; i != (Number(endDay) + 1); i++) {
+        const monthYear = days.substring(days.indexOf(".") + 1, days.indexOf("-") - 1);
+        const dayString = `${i}.${monthYear}`;
+        daysGen.push(dayString);
+        console.log(`${startDay} ${endDay} ${i}`);
+    }
+    return daysGen;
+}
+
+function insertChoiceDays(daysGen) {
+    
+}
+
 function setup() {
     // Set default calendar week if not set.
     const searchParams = new URLSearchParams(window.location.search);
@@ -150,6 +169,11 @@ function setup() {
     if(day != null) {
         setCurrentDay(day);
     }
+
+    // Generate the links to get to other 
+    // days in the current week.
+    const choiceDays = generateChoiceDays(Number(kw));
+    console.log(choiceDays);
 
     // Setup Markdown editor (easyMDE)
     const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
