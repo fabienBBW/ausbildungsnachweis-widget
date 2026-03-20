@@ -140,7 +140,14 @@ function generateChoiceDays(CW) {
 }
 
 function insertChoiceDays(daysGen) {
-    
+    const elem = document.querySelector("#choose-days");
+    daysGen.map((day) => elem.insertAdjacentHTML("beforeend", 
+        `<a href="index.html" class="day-select">${day}</a>`
+    ));
+}
+
+function toggleDisplayChoiceDays() {
+    document.querySelector("#choose-days").classList.toggle("hide-choose-days");
 }
 
 function setup() {
@@ -174,6 +181,7 @@ function setup() {
     // days in the current week.
     const choiceDays = generateChoiceDays(Number(kw));
     console.log(choiceDays);
+    insertChoiceDays(choiceDays);
 
     // Setup Markdown editor (easyMDE)
     const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});

@@ -131,3 +131,16 @@ html {
 .day-select {
     text-decoration: underline dotted #38598b 1px;
 }
+
+.hide-choose-days {
+    display: none;
+}
+
+#choose-days:not(.hide-choose-days) {
+    display: flex;
+    flex-direction: column;
+}
+
+#choose-days * {
+    margin: 0.5em;
+}
