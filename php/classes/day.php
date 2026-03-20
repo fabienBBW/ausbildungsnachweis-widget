@@ -1,12 +1,12 @@
 <?php
 class Day {
-    public int $day_id;
+    public null|int $day_id;
     public string $day_date;
     public string $day_activities_json;
     public int $day_cw;
 
     // construct new Day object based on given values.
-    public static function fromRaw(int $day_id, string $day_date, string $day_activities_json, int $day_cw) {
+    public static function fromRaw(null|int $day_id, string $day_date, string $day_activities_json, int $day_cw) {
         $day = new static();
         $day->day_id = $day_id;
         $day->day_date = $day_date;
@@ -23,6 +23,14 @@ class Day {
         $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
         $day = $stmt->fetch();
         return $day;
+    }
+
+    public static function getDaysFromCW(int $day_cw) {
+        require("../config.php");
+        $stmt = $pdo->prepare("SELECT * FROM days WHERE day_cw = ?");
+        $stmt->execute([$day_cw]);
+        $days = $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
+        return $days;
     }
 
     // save changes or new Day object to DB.

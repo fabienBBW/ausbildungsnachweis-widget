@@ -121,7 +121,7 @@ function toggleSelectKWs() {
 function setCurrentDay(timestamp) {
     const date = new Date(timestamp * 1000);
     const dateStr = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-    document.querySelector("#current-day").innerHTML = `<h3>${dateStr}</h3>`
+    document.querySelector("#current-day-text").innerText = `${dateStr}`
 }
 
 function setup() {

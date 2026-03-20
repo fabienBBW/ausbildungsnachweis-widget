@@ -53,6 +53,8 @@ html {
     border: 2px solid #a2a8d3;
     border-radius: 20px;
     margin: 1em;
+    align-items: center;
+    justify-content: center;
 }
 
 .daterange.select {
@@ -104,4 +106,24 @@ html {
 .EasyMDEContainer .CodeMirror {
     background: inherit;
     color: inherit;
+}
+
+#current-day {
+    display: flex;
+    flex-direction: row;
+    border: 5px solid #a2a8d3;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+#current-day:hover {
+    background-color: #38598b;
+    color: white;
+    cursor: pointer;
+}
+
+#current-day * {
+    margin: 0.5em;
+    padding: 0.5em;
 }
