@@ -35,7 +35,7 @@ class Day {
 
     // save changes or new Day object to DB.
     public function save() {
-        require("../config.php");
+        require(__DIR__ . "/../config.php");
         $day_id = $this->day_id;
         if($day_id == null || $this->fromId($day_id) == false) {
             // completely new day object.

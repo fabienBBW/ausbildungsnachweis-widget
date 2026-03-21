@@ -65,6 +65,18 @@ function createTableWeek($pdo) {
     }
 }
 
+function seedDaysTable(DateTimeImmutable $start_date) {
+    require("./classes/day.php");
+    for($i = 0; $i <= 4; $i++) {
+        $current_date = $start_date->add(new DateInterval("P${i}D"));
+        $current_date_timestamp = $current_date->getTimestamp();
+        $cw = 122026;
+        $day = Day::fromRaw(null, $current_date_timestamp, "[\"{$current_date->format('Y-m-d')}\"]", $cw);
+        $day->save();
+        echo "Saved day {$current_date->format('Y-m-d')}";
+    }
+}
+
 if(isset($_GET['create_table'])) {
     echo "<br /> create_table param = " . $_GET["create_table"] . "<br />";
     if($_GET['create_table'] == "days") {
@@ -72,6 +84,9 @@ if(isset($_GET['create_table'])) {
     }
     if($_GET["create_table"] == "weeks") {
         createTableWeek($pdo);
+    }
+    if($_GET["create_table"] == "seed-days") {
+        seedDaysTable(DateTimeImmutable::createFromFormat("Y-m-d", "2026-03-16"));
     }
 }
 ?>
