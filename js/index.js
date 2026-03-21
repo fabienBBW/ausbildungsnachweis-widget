@@ -16,6 +16,39 @@ function addNewEntry() {
     insertElement.insertAdjacentHTML("beforeend", elementToInsert)
 }
 
+// generateDateRangeGetStartDate: generate the workdays 
+// range for a given calendar week.
+// return the start date of the work week as a Date object.
+function generateDateRangeGetStartDate(calendarWeek, year) {
+    // Calculate the beginning of the given calendar week.
+    const lastDay = (calendarWeek - 1) * 7;
+    // Calculate the number of milliseconds from the beginning of the year
+    // (e.g. 01-01-2026) to the start of the calendar week.
+    const millisecondsElapsedSinceYearBegan = lastDay * 24 * 60 * 60 * 1000;
+    // Calculate the number of milliseconds 
+    // from the EPOCH to the beginning
+    // of the first calendar week of the
+    // given year.
+    const millisecondsNewYear = new Date(`${year}`);
+    const day = millisecondsNewYear.getDay();
+    // Set the time to be the Monday of the first week of the year,
+    // since this is the start of the first calendar week.
+    if(day != 1) {
+        let isDay = millisecondsNewYear.getDay();
+        while (isDay != 1) {
+            millisecondsNewYear.setHours(millisecondsNewYear.getHours() - 24);
+            isDay = millisecondsNewYear.getDay();
+            //console.log(isDay);
+        }
+    }
+    const millisecondsElapsed = millisecondsNewYear.getTime() + millisecondsElapsedSinceYearBegan;
+    const dateRet = new Date(millisecondsElapsed);
+    //console.log(dateRet.toString());
+
+    // dateRet is the start date.
+    return dateRet;
+}
+
 // generateDateRange: generate the workdays 
 // range for a given calendar week.
 function generateDateRange(calendarWeek, year) {
@@ -125,25 +158,23 @@ function setCurrentDay(timestamp) {
 }
 
 function generateChoiceDays(CW) {
-    const days = generateDateRange(CW, "2026");
-    const startDay = days.substring(0, 2);
-    const endDay = days.substring(days.indexOf("- ") + 2, days.indexOf("- ") + 4);
-    const daysGen = [];
-    console.log(`${startDay} ${endDay}`);
-    for(let i = startDay; i != (Number(endDay) + 1); i++) {
-        const monthYear = days.substring(days.indexOf(".") + 1, days.indexOf("-") - 1);
-        const dayString = `${i}.${monthYear}`;
-        daysGen.push(dayString);
-        console.log(`${startDay} ${endDay} ${i}`);
+    const startDate = generateDateRangeGetStartDate(CW, "2026");
+    let daysGen = [];
+    for(let i = startDate.getDate(); i != (startDate.getDate() + 5); i++) {
+        const currentDate = new Date(startDate.getTime());
+        currentDate.setDate(i);
+        daysGen.push(`
+            <a href="index.html?kw=${CW}&day=${Math.floor(currentDate.getTime() / 1000)}">
+                ${currentDate.getDate()}.${currentDate.getMonth() + 1}.${currentDate.getFullYear()}
+            </a>
+        `);
     }
     return daysGen;
 }
 
 function insertChoiceDays(daysGen) {
     const elem = document.querySelector("#choose-days");
-    daysGen.map((day) => elem.insertAdjacentHTML("beforeend", 
-        `<a href="index.html" class="day-select">${day}</a>`
-    ));
+    daysGen.map((day) => elem.insertAdjacentHTML("beforeend", day));
 }
 
 function toggleDisplayChoiceDays() {
