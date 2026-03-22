@@ -1,3 +1,11 @@
+import { Day } from "./classes/day.js";
+
+// AJAX fetch the days for the current calendar week
+// (if any).
+async function getDaysForCW(cw) {
+    const days = await Day.fromCW(cw);
+}
+
 // addNewEntry: add a new input for inputting activities 
 // of the day.
 function addNewEntry() {
@@ -138,10 +146,10 @@ function setKWFromQuery() {
 // date ranges (for the user to select them if needed).
 // - kw_int: kalenderwoche integer
 function setSelectKWs(kw_int) {
-    kw_previous = kw_int - 1;
+    let kw_previous = kw_int - 1;
     document.querySelector("#badge-kw-previous").innerText = `KW ${kw_previous}`;
     document.querySelector("#daterange-previous").innerText = generateDateRange(kw_previous, "2026");
-    kw_next = kw_int + 1;
+    let kw_next = kw_int + 1;
     document.querySelector("#badge-kw-next").innerText = `KW ${kw_next}`;
     document.querySelector("#daterange-next").innerText = generateDateRange(kw_next, "2026");
 }
@@ -222,6 +230,9 @@ function setup() {
 
     // Setup Markdown editor (easyMDE)
     const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
+
+    // Get the saved days (if any).
+    getDaysForCW(kw);
 }
 
 setup();
