@@ -17,7 +17,7 @@ class Day {
 
     // construct new Day object based on data from database.
     public static function fromId(int $day_id) {
-        require("../config.php");
+        require(__DIR__ . "/../config.php");
         $stmt = $pdo->prepare("SELECT * FROM days WHERE day_id = ?");
         $stmt->execute([$day_id]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -26,7 +26,7 @@ class Day {
     }
 
     public static function getDaysFromCW(int $day_cw) {
-        require("../config.php");
+        require(__DIR__ . "/../config.php");
         $stmt = $pdo->prepare("SELECT * FROM days WHERE day_cw = ?");
         $stmt->execute([$day_cw]);
         $days = $stmt->fetchAll(PDO::FETCH_CLASS, self::class);

@@ -1,5 +1,5 @@
 <?php
-    require_once("../classes/day.php");
+    require_once(__DIR__ . "/../classes/day.php");
     $day = Day::fromId(112);
     var_dump($day);
 

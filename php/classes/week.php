@@ -14,7 +14,7 @@ class Week {
     }
 
     public static function fromCW(int $week_cw) {
-        require("../config.php");
+        require(__DIR__ . "/../config.php");
         $stmt = $pdo->prepare("SELECT * FROM weeks WHERE week_cw = ?");
         $stmt->execute([$week_cw]);
         $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
@@ -23,7 +23,7 @@ class Week {
     }
 
     public function save() {
-        require("../config.php");
+        require(__DIR__ . "/../config.php");
         $week_cw = $this->week_cw;
         if($this->fromCW($week_cw) == false) {
             // completely new week object.

@@ -18,7 +18,7 @@
 <?php 
 
 // config.php executes the SQL connect statement to generate the PDO object.
-require_once("./config.php");
+require_once(__DIR__ . "/config.php");
 
 // createTableDay: create the table 
 // which will hold the activity information for a day.
@@ -66,7 +66,7 @@ function createTableWeek($pdo) {
 }
 
 function seedDaysTable(DateTimeImmutable $start_date) {
-    require("./classes/day.php");
+    require(__DIR__ . "/classes/day.php");
     for($i = 0; $i <= 4; $i++) {
         $current_date = $start_date->add(new DateInterval("P${i}D"));
         $current_date_timestamp = $current_date->getTimestamp();
