@@ -6,6 +6,23 @@ export class Day {
         this.day_cw = day_cw;
     }
 
+    static async fromDate(dateStr) {
+        const request = new Request(`${window.location.origin}/ausbildungsnachweis-widget/php/day/day_get.php`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ day_date: dateStr })
+            }
+        );
+        const response = await fetch(request);
+        const result = await response.json();
+        console.log(`result: ${result}`);
+        const day = new Day(result.day_id, result.day_date, result.day_activities_json, result.day_cw);
+        return day;
+    }
+
     static async fromCW(cw) {
         const request = new Request(`${window.location.origin}/ausbildungsnachweis-widget/php/day/days_get.php`, 
             {

@@ -6,6 +6,27 @@ async function getDaysForCW(cw) {
     const days = await Day.fromCW(cw);
 }
 
+// AJAX fetch the day for the current date
+// (if any).
+async function getDayForDateStr(currentDate) {
+    let monthStr = (currentDate.getMonth() + 1).toString();
+    if(monthStr.length == 1) {
+        monthStr = "0" + monthStr;
+    }
+    let dayStr = (currentDate.getDate()).toString();
+    if(dayStr.length == 1) {
+        dayStr = "0" + dayStr;
+    }
+    const dateStr = `${currentDate.getFullYear()}-${monthStr}-${dayStr}`;
+    const day = await Day.fromDate(dateStr);
+    return day;
+}
+
+async function setDayProperties(dayObj, easyMDE) {
+    console.log(JSON.stringify(dayObj));
+    easyMDE.value(JSON.parse(dayObj.day_activities_json)[0]);
+}
+
 // addNewEntry: add a new input for inputting activities 
 // of the day.
 function addNewEntry() {
@@ -195,7 +216,7 @@ function toggleDisplayChoiceDays() {
     document.querySelector("#choose-days").classList.toggle("hide-choose-days");
 }
 
-function setup() {
+async function setup() {
     // Set default calendar week if not set.
     const searchParams = new URLSearchParams(window.location.search);
     if(!(searchParams.has("kw"))) {
@@ -216,10 +237,21 @@ function setup() {
         searchParams.append("day", timestampSeconds.toString());
         window.location.search = searchParams.toString();
     }
+
+     // Setup Markdown editor (easyMDE)
+    const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
+
     // Set day in the UI based on params.
     const day = searchParams.get("day");
     if(day != null) {
         setCurrentDay(day);
+        // Get the saved days (if any).
+        let currentDayTime = new Date(Number(day) * 1000);
+        console.log(currentDayTime.toString());
+        const dayObj = await getDayForDateStr(currentDayTime);
+        if(dayObj !== false) {
+            setDayProperties(dayObj, easyMDE);
+        }
     }
 
     // Generate the links to get to other 
@@ -228,11 +260,8 @@ function setup() {
     console.log(choiceDays);
     insertChoiceDays(choiceDays);
 
-    // Setup Markdown editor (easyMDE)
-    const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
-
-    // Get the saved days (if any).
-    getDaysForCW(kw);
+    // Bind onclick for displaying the choice of work days.
+    document.querySelector("#current-day").addEventListener("click", toggleDisplayChoiceDays);
 }
 
 setup();

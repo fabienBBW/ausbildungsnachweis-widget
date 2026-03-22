@@ -25,6 +25,16 @@ class Day {
         return $day;
     }
 
+    // construct new day based on given date (data from database).
+    public static function fromDate(string $day_date) {
+        require(__DIR__ . "/../config.php");
+        $stmt = $pdo->prepare("SELECT * FROM days WHERE day_date = ?");
+        $stmt->execute([$day_date]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $day = $stmt->fetch();
+        return $day;
+    }
+
     public static function getDaysFromCW(int $day_cw) {
         require(__DIR__ . "/../config.php");
         $stmt = $pdo->prepare("SELECT * FROM days WHERE day_cw = ?");

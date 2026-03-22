@@ -14,6 +14,9 @@
             <li>
                 seed_db.php?create_table=weeks -> Create table weeks.
             </li>
+            <li>
+                seed_db.php?create_table=seed-days -> Seed days table.
+            </li>
         </ul>
 <?php 
 
@@ -29,7 +32,7 @@ function createTableDay($pdo) {
     try {
         $sql = "CREATE TABLE IF NOT EXISTS days (
             day_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            day_date BIGINT UNSIGNED NOT NULL,
+            day_date TEXT NOT NULL,
             day_activities_json JSON NOT NULL,
             day_cw INT UNSIGNED NOT NULL
         );";
@@ -69,11 +72,11 @@ function seedDaysTable(DateTimeImmutable $start_date) {
     require(__DIR__ . "/classes/day.php");
     for($i = 0; $i <= 4; $i++) {
         $current_date = $start_date->add(new DateInterval("P${i}D"));
-        $current_date_timestamp = $current_date->getTimestamp();
+        $current_date_timestamp = $current_date->format("Y-m-d");
         $cw = 122026;
         $day = Day::fromRaw(null, $current_date_timestamp, "[\"{$current_date->format('Y-m-d')}\"]", $cw);
         $day->save();
-        echo "Saved day {$current_date->format('Y-m-d')}";
+        echo "Saved day {$current_date->format('Y-m-d')}<br/>";
     }
 }
 
