@@ -262,6 +262,8 @@ async function setup() {
 
     // Bind onclick for displaying the choice of work days.
     document.querySelector("#current-day").addEventListener("click", toggleDisplayChoiceDays);
+    // Bind onclick for displaying the choice of calendar weeks.
+    document.querySelector("#open-dropdown").addEventListener("click", toggleSelectKWs);
 }
 
 setup();
