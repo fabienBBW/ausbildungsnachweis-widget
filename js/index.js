@@ -87,28 +87,34 @@ function generateDateRange(calendarWeek, year) {
 function getCWForTimestamp(currentTime) {
     const newYearDate = new Date(`${currentTime.getFullYear()}`);
     let isDay = newYearDate.getDay();
-    //console.log(`${isDay}: ${currentTime.getDay()}`)
+    console.log(`${isDay}: ${currentTime.getDay()}`)
     if(isDay != currentTime.getDay()) {
         while(isDay != currentTime.getDay()) {
             if(isDay > currentTime.getDay()) {
-                newYearDate.setHours(newYearDate.getHours() - 24);
+                newYearDate.setHours(newYearDate.getHours() - 23);
                 isDay = newYearDate.getDay();
             } else {
-                newYearDate.setHours(newYearDate.getHours() + 24);
+                newYearDate.setHours(newYearDate.getHours() + 23);
                 isDay = newYearDate.getDay();
             }
-            //console.log(`${isDay}: ${currentTime.getDay()}`)
+            console.log(`${isDay}: ${currentTime.getDay()}`)
         }
     }
     let newYearCurrentDate = `${newYearDate.getFullYear()}-${newYearDate.getMonth()}-${newYearDate.getDate()}`;
     let timestampDate = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()}`;
     let cw = 1;
-    //console.log(`${newYearCurrentDate}: ${timestampDate}`);
+    // current day is Sunday 
+    // (e.g. one day before the first 
+    // calendar week of the year).
+    if(isDay == 0) {
+        cw = 0;
+    }
+    console.log(`${newYearCurrentDate}: ${timestampDate}`);
     while(newYearCurrentDate != timestampDate) {
         newYearDate.setDate(newYearDate.getDate() + 7)
         cw += 1;
-        //console.log(`${newYearCurrentDate}: ${timestampDate}`);
         newYearCurrentDate = `${newYearDate.getFullYear()}-${newYearDate.getMonth()}-${newYearDate.getDate()}`;
+        console.log(`${newYearCurrentDate}: ${timestampDate}`);
     }
     return cw;
 }
