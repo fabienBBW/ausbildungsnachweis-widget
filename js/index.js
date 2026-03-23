@@ -27,6 +27,18 @@ async function setDayProperties(dayObj, easyMDE) {
     easyMDE.value(JSON.parse(dayObj.day_activities_json)[0]);
 }
 
+async function createNewDayObj(currentDate, CW) {
+    // constructor function automatically
+    // creates day object on "window" browser
+    // global for easy saving of changes.
+    const day = new Day(
+        null, 
+        `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`,
+        null,
+        `${CW}2026`
+    );
+}
+
 // addNewEntry: add a new input for inputting activities 
 // of the day.
 function addNewEntry() {
@@ -251,6 +263,10 @@ async function setup() {
         const dayObj = await getDayForDateStr(currentDayTime);
         if(dayObj !== false) {
             setDayProperties(dayObj, easyMDE);
+        } else {
+            // Generate a new day object
+            // if no saved day is found.
+            createNewDayObj(currentDayTime, kw);
         }
     }
 

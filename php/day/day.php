@@ -12,6 +12,7 @@
             $day = Day::fromRaw(null, $json_data["day_date"], $json_data["day_activities_json"], $json_data["day_cw"]);
         }
         
-        $day->save();
+        $ret = $day->save();
+        echo json_encode($ret);
     }
 ?>
