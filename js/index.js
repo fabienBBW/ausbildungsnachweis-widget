@@ -22,18 +22,35 @@ async function getDayForDateStr(currentDate) {
     return day;
 }
 
+function saveDay() {
+    const day_activities_json = JSON.stringify([window.myEasyMDE.value()]);
+    console.log(window.myEasyMDE);
+    window.currentDayObj.day_activities_json = day_activities_json;
+    window.currentDayObj.save();
+}
+
 async function setDayProperties(dayObj, easyMDE) {
     console.log(JSON.stringify(dayObj));
-    easyMDE.value(JSON.parse(dayObj.day_activities_json)[0]);
+    if(dayObj.day_activities_json != "[null]") {
+        easyMDE.value(JSON.parse(dayObj.day_activities_json)[0]);
+    }
 }
 
 async function createNewDayObj(currentDate, CW) {
     // constructor function automatically
     // creates day object on "window" browser
     // global for easy saving of changes.
+    let monthStr = (currentDate.getMonth() + 1).toString();
+    if(monthStr.length == 1) {
+        monthStr = "0" + monthStr;
+    }
+    let dayStr = (currentDate.getDate()).toString();
+    if(dayStr.length == 1) {
+        dayStr = "0" + dayStr;
+    }
     const day = new Day(
         null, 
-        `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`,
+        `${currentDate.getFullYear()}-${monthStr}-${dayStr}`,
         null,
         `${CW}2026`
     );
@@ -252,6 +269,7 @@ async function setup() {
 
      // Setup Markdown editor (easyMDE)
     const easyMDE = new EasyMDE({element: document.querySelector("#activities-edit")});
+    window.myEasyMDE = easyMDE;
 
     // Set day in the UI based on params.
     const day = searchParams.get("day");
@@ -280,6 +298,8 @@ async function setup() {
     document.querySelector("#current-day").addEventListener("click", toggleDisplayChoiceDays);
     // Bind onclick for displaying the choice of calendar weeks.
     document.querySelector("#open-dropdown").addEventListener("click", toggleSelectKWs);
+    // Bind onclick for saving changes to the current day.
+    document.querySelector("#save-day-btn").addEventListener("click", saveDay);
 }
 
 setup();
