@@ -52,7 +52,7 @@ async function createNewDayObj(currentDate, CW) {
         null, 
         `${currentDate.getFullYear()}-${monthStr}-${dayStr}`,
         null,
-        `${CW}2026`
+        `${CW}${currentDate.getFullYear()}`
     );
 }
 
@@ -208,11 +208,6 @@ function setSelectKWs(kw_int) {
 // for selecting different kalenderwochen.
 function toggleSelectKWs() {
     document.querySelector("#dateranges-select").classList.toggle("hidden");
-    if(document.querySelector("#dateranges-select").classList.contains("hidden")) {
-        document.querySelector("#dropdown-icon").classList = "fa-solid fa-arrow-down";
-    } else {
-        document.querySelector("#dropdown-icon").classList = "fa-solid fa-arrow-up";
-    }
 }
 
 function setCurrentDay(timestamp) {
@@ -222,7 +217,7 @@ function setCurrentDay(timestamp) {
 }
 
 function generateChoiceDays(CW) {
-    const startDate = generateDateRangeGetStartDate(CW, "2026");
+    const startDate = generateDateRangeGetStartDate(CW, window.currentDateObj.getFullYear());
     let daysGen = [];
     for(let i = startDate.getDate(); i != (startDate.getDate() + 5); i++) {
         const currentDate = new Date(startDate.getTime());
@@ -286,6 +281,7 @@ async function setup() {
             // if no saved day is found.
             createNewDayObj(currentDayTime, kw);
         }
+        window.currentDateObj = currentDayTime;
     }
 
     // Generate the links to get to other 
