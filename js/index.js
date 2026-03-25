@@ -199,15 +199,32 @@ function setSelectKWs(kw_int) {
     let kw_previous = kw_int - 1;
     document.querySelector("#badge-kw-previous").innerText = `KW ${kw_previous}`;
     document.querySelector("#daterange-previous").innerText = generateDateRange(kw_previous, "2026");
+    let previousTimestamp = generateDateRangeGetStartDate(kw_previous, "2026");
+    previousTimestamp = Math.floor(previousTimestamp.getTime() / 1000);
+    document.querySelector("#daterange-previous-select").addEventListener("click", () => {
+        window.location.search = `?kw=${kw_previous}&day=${previousTimestamp}`;
+    });
     let kw_next = kw_int + 1;
     document.querySelector("#badge-kw-next").innerText = `KW ${kw_next}`;
     document.querySelector("#daterange-next").innerText = generateDateRange(kw_next, "2026");
+    let nextTimestamp = generateDateRangeGetStartDate(kw_next, "2026");
+    nextTimestamp = Math.floor(nextTimestamp.getTime() / 1000);
+    document.querySelector("#daterange-next-select").addEventListener("click", () => {
+        window.location.search = `?kw=${kw_next}&day=${nextTimestamp}`;
+    });
 }
 
 // toggleSelectKWs: close / open the selection menu
 // for selecting different kalenderwochen.
 function toggleSelectKWs() {
     document.querySelector("#dateranges-select").classList.toggle("hidden");
+}
+
+function inputCustomKWGoTo() {
+    const kw = document.querySelector("#input-custom-kw").value;
+    let startTimestamp = generateDateRangeGetStartDate(kw, "2026");
+    startTimestamp = Math.floor(startTimestamp.getTime() / 1000);
+    window.location.search = `?kw=${kw}&day=${startTimestamp}`;
 }
 
 function setCurrentDay(timestamp) {
@@ -296,6 +313,8 @@ async function setup() {
     document.querySelector("#open-dropdown").addEventListener("click", toggleSelectKWs);
     // Bind onclick for saving changes to the current day.
     document.querySelector("#save-day-btn").addEventListener("click", saveDay);
+    // Bind onclick for going to custom calendar week.
+    document.querySelector("#input-custom-kw-go").addEventListener("click", inputCustomKWGoTo);
 }
 
 setup();
