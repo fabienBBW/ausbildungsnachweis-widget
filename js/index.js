@@ -263,7 +263,7 @@ function generateChoiceDays(CW) {
         const currentDate = new Date(startDate.getTime());
         currentDate.setDate(i);
         daysGen.push(`
-            <a href="index.html?kw=${CW}&day=${Math.floor(currentDate.getTime() / 1000)}">
+            <a href="index.html?kw=${CW}&day=${Math.floor(currentDate.getTime() / 1000)}&year=${currentDate.getFullYear()}">
                 ${currentDate.getDate()}.${currentDate.getMonth() + 1}.${currentDate.getFullYear()}
             </a>
         `);
