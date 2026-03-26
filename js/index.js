@@ -74,6 +74,14 @@ function addNewEntry() {
     insertElement.insertAdjacentHTML("beforeend", elementToInsert)
 }
 
+function setParamsForCustomCW(calendarWeek, year) {
+    const startDate = generateDateRangeGetStartDate(calendarWeek, year);
+    const dayParam = Math.floor(startDate.getTime() / 1000);
+    const kwParam = calendarWeek;
+    const yearParam = year;
+    window.location.search = `?kw=${kwParam}&day=${dayParam}&year=${yearParam}`;
+}
+
 // generateDateRangeGetStartDate: generate the workdays 
 // range for a given calendar week.
 // return the start date of the work week as a Date object.
@@ -188,7 +196,7 @@ function setKWFromQuery() {
         return null;
     }
     document.querySelector("#badge-kw").innerText = `KW ${kw}`;
-    document.querySelector("#daterange-current").innerText = generateDateRange(Number(kw), "2026");
+    document.querySelector("#daterange-current").innerText = generateDateRange(Number(kw), window.currentFullYear);
     return kw;
 }
 
@@ -197,16 +205,26 @@ function setKWFromQuery() {
 // - kw_int: kalenderwoche integer
 function setSelectKWs(kw_int) {
     let kw_previous = kw_int - 1;
+    let previousYear = window.currentFullYear;
+    if(kw_previous == 0) {
+        kw_previous = 52;
+        previousYear = previousYear - 1;
+    }
     document.querySelector("#badge-kw-previous").innerText = `KW ${kw_previous}`;
-    document.querySelector("#daterange-previous").innerText = generateDateRange(kw_previous, "2026");
+    document.querySelector("#daterange-previous").innerText = generateDateRange(kw_previous, previousYear);
     let previousTimestamp = generateDateRangeGetStartDate(kw_previous, "2026");
     previousTimestamp = Math.floor(previousTimestamp.getTime() / 1000);
     document.querySelector("#daterange-previous-select").addEventListener("click", () => {
         window.location.search = `?kw=${kw_previous}&day=${previousTimestamp}`;
     });
     let kw_next = kw_int + 1;
+    let nextYear = window.currentFullYear;
+    if(kw_next == 53) {
+        kw_next = 1;
+        nextYear = nextYear + 1;
+    }
     document.querySelector("#badge-kw-next").innerText = `KW ${kw_next}`;
-    document.querySelector("#daterange-next").innerText = generateDateRange(kw_next, "2026");
+    document.querySelector("#daterange-next").innerText = generateDateRange(kw_next, nextYear);
     let nextTimestamp = generateDateRangeGetStartDate(kw_next, "2026");
     nextTimestamp = Math.floor(nextTimestamp.getTime() / 1000);
     document.querySelector("#daterange-next-select").addEventListener("click", () => {
@@ -222,15 +240,20 @@ function toggleSelectKWs() {
 
 function inputCustomKWGoTo() {
     const kw = document.querySelector("#input-custom-kw").value;
-    let startTimestamp = generateDateRangeGetStartDate(kw, "2026");
+    const year = document.querySelector("#input-custom-year").value;
+    let startTimestamp = generateDateRangeGetStartDate(kw, year);
     startTimestamp = Math.floor(startTimestamp.getTime() / 1000);
-    window.location.search = `?kw=${kw}&day=${startTimestamp}`;
+    if(year != "") {
+        window.location.search = `?kw=${kw}&day=${startTimestamp}&year=${year}`;
+    } else {
+        window.location.search = `?kw=${kw}&day=${startTimestamp}`;
+    }
 }
 
 function setCurrentDay(timestamp) {
     const date = new Date(timestamp * 1000);
     const dateStr = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-    document.querySelector("#current-day-text").innerText = `${dateStr}`
+    document.querySelector("#current-day-text").innerText = `${dateStr}`;
 }
 
 function generateChoiceDays(CW) {
@@ -258,8 +281,12 @@ function toggleDisplayChoiceDays() {
 }
 
 async function setup() {
+    window.currentFullYear = "2026";
     // Set default calendar week if not set.
     const searchParams = new URLSearchParams(window.location.search);
+    if(searchParams.has("year")) {
+        window.currentFullYear = searchParams.get("year");
+    }
     if(!(searchParams.has("kw"))) {
         const date = new Date();
         const cw = getCWForTimestamp(date);
@@ -299,6 +326,7 @@ async function setup() {
             createNewDayObj(currentDayTime, kw);
         }
         window.currentDateObj = currentDayTime;
+        window.currentFullYear = currentDayTime.getFullYear();
     }
 
     // Generate the links to get to other 
@@ -315,6 +343,13 @@ async function setup() {
     document.querySelector("#save-day-btn").addEventListener("click", saveDay);
     // Bind onclick for going to custom calendar week.
     document.querySelector("#input-custom-kw-go").addEventListener("click", inputCustomKWGoTo);
+
+    // test
+    /*
+    if(!(searchParams.has("year"))) {
+        setParamsForCustomCW(25, 2025);
+    }
+    */
 }
 
 setup();
