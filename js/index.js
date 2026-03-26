@@ -286,6 +286,7 @@ async function setup() {
     const searchParams = new URLSearchParams(window.location.search);
     if(searchParams.has("year")) {
         window.currentFullYear = searchParams.get("year");
+        document.querySelector(".header-year").innerText = window.currentFullYear;
     }
     if(!(searchParams.has("kw"))) {
         const date = new Date();
