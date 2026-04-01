@@ -1,0 +1,224 @@
+<?php
+    echo <<<HTML
+        <html>
+    <head>
+        <title>
+            Ausbildungsnachweisheft
+        </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../../css/print_style.css" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="index.js"></script>
+        <!---->
+        <div id="ihk-logo">
+            <img src="../res/ihk-logo.png" width="15%" height="auto"></img>
+        </div>
+        <hr />
+        <div id="heading">
+            <h1>
+                Ausbildungsnachweis
+            </h1>
+        </div>
+        <div id="personal-effects-table">
+            <table>
+                <tr>
+                    <td>
+                        {$lastname}, {$firstname}
+                        <hr />
+                        Name, Vorname
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {$place_of_birth}
+                        <hr />
+                        Geburtsort
+                    </td>
+                    <td>
+                        {$date_of_birth}
+                        <hr />
+                        Geburtsdatum
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {$address}
+                        <hr />
+                        Anschrift
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        BvB
+                        <hr />
+                        Ausbildungsberuf
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        BBW Südhessen gGmbH
+                        <hr />
+                        Ausbildungsfirma
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        04.08.2025
+                        <hr />
+                        Beginn der Ausbildung
+                    </td>
+                    <td>
+                        04.08.2026
+                        <hr />
+                        Ende der Ausbildung
+                    </td>
+                    <td>
+                        01
+                        <hr />
+                        Heft-Nr.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h1>
+            Inhalt
+        </h1>
+
+        <div id="table-of-contents">
+            <div>
+                Ausbildungsnachweis 001
+            </div>
+            <div id="page-number">
+                3
+            </div>
+        </div>
+
+        <div id="ausbildungsnachweise">
+            <div id="ab-001">
+                <h1>
+                    Ausbildungsnachweis 001
+                </h1>
+                <div>
+                <table id="details-personals">
+                    <tr>
+                        <td>
+                            Name des/der Auszubildenden:
+                        </td>
+                        <td>
+                            Max Mustermann
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ausbildungsjahr:
+                        </td>
+                        <td>
+                            BvB
+                        </td>
+                        <td>
+                            Ggf. ausbildende Abteilung:
+                        </td>
+                        <td>
+                            Office & IT
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Ausbildungswoche vom:
+                        </td>
+                        <td>
+                            xx.xx.xxxx
+                        </td>
+                        <td>
+                            bis:
+                        </td>
+                        <td>
+                            xx.xx.xxxx
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <div>
+                <table id="hours">
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            Betriebliche Tätigkeiten, Unterweisungen bzw. überbetriebliche 
+Unterweisungen (z. B. im Handwerk), <br /> betrieblicher Unterricht, sonstige 
+Schulungen, Themen des Berufsschulunterrichts
+                        </th>
+                        <th>
+                            Stunden
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Montag
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dienstag
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mittwoch
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Donnerstag
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Freitag
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </div>
+        <button onclick="window.print()" type="button">
+            Save document
+        </button>
+    </body>
+</html>
+HTML;
+?>
