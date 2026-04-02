@@ -55,7 +55,7 @@ function createTableWeek($pdo) {
     try {
         $sql = "CREATE TABLE IF NOT EXISTS weeks (
             week_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            days_ids_json JSON,
+            week_timestamp TEXT NOT NULL,
             week_cw INT UNSIGNED NOT NULL
         );";
         $return_val = $pdo->exec($sql);
