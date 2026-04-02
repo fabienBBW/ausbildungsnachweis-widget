@@ -1,16 +1,14 @@
-<?php
-    echo <<<HTML
-        <html>
+<html>
     <head>
         <title>
             Ausbildungsnachweisheft
         </title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../../css/print_style.css" />
+        <link rel="stylesheet" href="../css/print_style.css" />
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <script src="index.js"></script>
+        <script src="../js/templating.js"></script>
         <!---->
         <div id="ihk-logo">
             <img src="../res/ihk-logo.png" width="15%" height="auto"></img>
@@ -25,26 +23,26 @@
             <table>
                 <tr>
                     <td>
-                        {$lastname}, {$firstname}
+                        <div id="pe-lastname-firstname"></div>
                         <hr />
                         Name, Vorname
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        {$place_of_birth}
+                        <div id="pe-place-of-birth"></div>
                         <hr />
                         Geburtsort
                     </td>
                     <td>
-                        {$date_of_birth}
+                        <div id="pe-date-of-birth"></div>
                         <hr />
                         Geburtsdatum
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        {$address}
+                        <div id="pe-address"></div>
                         <hr />
                         Anschrift
                     </td>
@@ -220,5 +218,3 @@ Schulungen, Themen des Berufsschulunterrichts
         </button>
     </body>
 </html>
-HTML;
-?>

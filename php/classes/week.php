@@ -21,6 +21,14 @@ class Week {
         return $week;
     }
 
+    public static function fromAllWeeks() {
+        require(__DIR__ . "/../config.php");
+        $stmt = $pdo->prepare("SELECT * FROM weeks");
+        $stmt->execute();
+        $weeks = $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
+        return $weeks;
+    }
+
     public function save() {
         require(__DIR__ . "/../config.php");
         $week_cw = $this->week_cw;

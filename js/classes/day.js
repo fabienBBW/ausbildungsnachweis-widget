@@ -53,7 +53,7 @@ export class Day {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ day_cw: "122026"})
+                body: JSON.stringify({ day_cw: cw })
             }
         );
         const response = await fetch(request);
