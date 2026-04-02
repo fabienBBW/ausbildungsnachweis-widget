@@ -118,7 +118,7 @@ function generateDateRangeGetStartDate(calendarWeek, year) {
 
 // generateDateRange: generate the workdays 
 // range for a given calendar week.
-function generateDateRange(calendarWeek, year) {
+export function generateDateRange(calendarWeek, year) {
     // Calculate the beginning of the given calendar week.
     const lastDay = (calendarWeek - 1) * 7;
     // Calculate the number of milliseconds from the beginning of the year
@@ -192,9 +192,12 @@ function setKWFromQuery() {
     // get the value in the query.
     const paramsString = window.location.search;
     const searchParams = new URLSearchParams(paramsString);
-    const kw = searchParams.get("kw");
+    let kw = searchParams.get("kw");
     if(kw == null) {
         return null;
+    }
+    if(Number(kw) < 10) {
+        kw = `0${kw}`;
     }
     document.querySelector("#badge-kw").innerText = `KW ${kw}`;
     document.querySelector("#daterange-current").innerText = generateDateRange(Number(kw), window.currentFullYear);

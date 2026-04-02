@@ -1,4 +1,4 @@
-class Week {
+export class Week {
     constructor(week_id = null, week_timestamp, week_cw) {
         this.week_id = null;
         this.week_timestamp = week_timestamp;
@@ -15,7 +15,7 @@ class Week {
 
         const response = await fetch(request);
         const result = await response.json();
-        console.log(`week.getAll result: ${result}`);
+        console.log(`week.getAll result: ${JSON.stringify(result)}`);
         return result;
     }
 }
