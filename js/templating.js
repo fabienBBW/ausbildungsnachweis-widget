@@ -112,6 +112,7 @@ Schulungen, Themen des Berufsschulunterrichts
                 <tr>
                     <td>
                         ${dayDate.toLocaleDateString("de-DE", {weekday: "long"})}
+                    </td>
                     <td>
                         ${day.day_activities_json}
                     </td>
