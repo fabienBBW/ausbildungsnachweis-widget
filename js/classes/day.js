@@ -1,9 +1,11 @@
 export class Day {
-    constructor(day_id, day_date, day_activities_json, day_cw) {
+    constructor(day_id, day_date, day_activities_json, day_cw, week_timestamp = null) {
         this.day_id = day_id;
         this.day_date = day_date;
         this.day_activities_json = day_activities_json;
         this.day_cw = day_cw;
+        this.week_timestamp = week_timestamp;
+        this.week_cw = day_cw;
         window.currentDayObj = this;
     }
 

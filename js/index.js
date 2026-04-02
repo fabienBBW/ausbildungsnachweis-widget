@@ -52,7 +52,8 @@ async function createNewDayObj(currentDate, CW) {
         null, 
         `${currentDate.getFullYear()}-${monthStr}-${dayStr}`,
         null,
-        `${CW}${currentDate.getFullYear()}`
+        `${CW}${currentDate.getFullYear()}`,
+        Math.floor(currentDate.getTime() / 1000)
     );
 }
 
@@ -321,6 +322,7 @@ async function setup() {
         const dayObj = await getDayForDateStr(currentDayTime);
         if(dayObj !== false) {
             setDayProperties(dayObj, easyMDE);
+            window.currentDayObj.week_timestamp = Math.floor(currentDayTime.getTime() / 1000);
         } else {
             // Generate a new day object
             // if no saved day is found.
