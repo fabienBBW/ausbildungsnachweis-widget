@@ -23,7 +23,7 @@ class Week {
 
     public static function fromAllWeeks() {
         require(__DIR__ . "/../config.php");
-        $stmt = $pdo->prepare("SELECT * FROM weeks");
+        $stmt = $pdo->prepare("SELECT * FROM weeks ORDER BY week_timestamp ASC");
         $stmt->execute();
         $weeks = $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
         return $weeks;

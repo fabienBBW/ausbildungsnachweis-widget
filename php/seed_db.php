@@ -34,7 +34,8 @@ function createTableDay($pdo) {
             day_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             day_date TEXT NOT NULL,
             day_activities_json JSON NOT NULL,
-            day_cw INT UNSIGNED NOT NULL
+            day_cw INT UNSIGNED NOT NULL,
+            day_timestamp BIGINT UNSIGNED NOT NULL
         );";
         $return_val = $pdo->exec($sql);
         if ($return_val === false) {

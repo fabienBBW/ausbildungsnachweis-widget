@@ -30,16 +30,16 @@ body {
     border: 1px solid;
 }
 
-#hours {
+.hours {
     border: 1px solid;
     border-collapse: collapse;
 }
 
-#hours td {
+.hours td {
     border: 1px solid;
 }
 
-#hours th {
+.hours th {
     border: 1px solid;
 }
 

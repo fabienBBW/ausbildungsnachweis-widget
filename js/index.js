@@ -26,6 +26,7 @@ function saveDay() {
     const day_activities_json = JSON.stringify([window.myEasyMDE.value()]);
     console.log(window.myEasyMDE);
     window.currentDayObj.day_activities_json = day_activities_json;
+    window.currentDayObj.day_timestamp = Math.floor(window.currentDateObj.getTime() / 1000);
     window.currentDayObj.save();
 }
 

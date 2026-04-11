@@ -10,9 +10,9 @@
         // Save day.
         $json_data = json_decode(file_get_contents("php://input"), true);
         if(array_key_exists("day_id", $json_data)) {
-            $day = Day::fromRaw($json_data["day_id"], $json_data["day_date"], $json_data["day_activities_json"], $json_data["day_cw"]);
+            $day = Day::fromRaw($json_data["day_id"], $json_data["day_date"], $json_data["day_activities_json"], $json_data["day_cw"], $json_data["day_timestamp"]);
         } else {
-            $day = Day::fromRaw(null, $json_data["day_date"], $json_data["day_activities_json"], $json_data["day_cw"]);
+            $day = Day::fromRaw(null, $json_data["day_date"], $json_data["day_activities_json"], $json_data["day_cw"], $json_data["day_timestamp"]);
         }
         
         $ret = $day->save();

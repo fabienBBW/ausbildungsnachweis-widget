@@ -46,7 +46,7 @@ async function convert() {
         const days = await Day.fromCW(week.week_cw);
         const dateRange = generateDateRange((week.week_cw.toString()).substring(0, 2), (week.week_cw.toString()).substring(2));
         const html = `
-            <div id="ab-001">
+            <div id="ab-${i}">
                 <h1>
                     Ausbildungsnachweis ${i + 1}
                 </h1>
@@ -85,7 +85,7 @@ async function convert() {
                 </table>
                 </div>
                 <div>
-                <table id="hours">
+                <table class="hours" id="hours-${i}">
                     <tr>
                         <th>
 
@@ -118,7 +118,7 @@ Schulungen, Themen des Berufsschulunterrichts
                     </td>
                 </tr>
             `;
-            document.querySelector("#hours").insertAdjacentHTML("beforeend", insertDetails);
+            document.querySelector(`#hours-${i}`).insertAdjacentHTML("beforeend", insertDetails);
         }
     }
 }
