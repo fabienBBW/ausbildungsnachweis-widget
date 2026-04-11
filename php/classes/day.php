@@ -56,7 +56,7 @@ class Day {
             if($ret_val == false) {
                 return false;
             }
-            return true;
+            return $pdo->lastInsertId();
         } else {
             $stmt = $pdo->prepare("UPDATE days SET day_date = ?, day_activities_json = ?, day_cw = ?, day_timestamp = ? WHERE day_id = ?");
             $ret_val = $stmt->execute([$this->day_date, $this->day_activities_json, $this->day_cw, $this->day_timestamp, $this->day_id]);

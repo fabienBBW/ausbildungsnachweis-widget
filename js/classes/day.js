@@ -22,6 +22,9 @@ export class Day {
         const response = await fetch(request);
         const result = await response.json();
         console.log(`day save result: ${result}`);
+        if(result.day_ret !== false && result.day_ret !== true) {
+            this.day_id = result.day_ret;
+        }
         return result;
     }
  
