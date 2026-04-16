@@ -124,3 +124,18 @@ Schulungen, Themen des Berufsschulunterrichts
 }
 
 convert();
+
+// Print to PDF with html2pdf JS library.
+// Add page breaks after each week and before the
+// listing of the first week.
+
+function printToPDF() {
+    const element = document.querySelector("body");
+    html2pdf().set({
+        pagebreak: {
+            after: "[id*=\"ab-\"]"
+        }
+    }).from(element).save();
+}
+
+document.querySelector("#save-document").addEventListener("click", printToPDF);
