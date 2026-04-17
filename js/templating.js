@@ -128,14 +128,12 @@ convert();
 // Print to PDF with html2pdf JS library.
 // Add page breaks after each week and before the
 // listing of the first week.
-
+// This library seems to not be working properly.
+// Let's add CSS rules for page breaks and print with the
+// browser's built-in "Print to PDF".
 function printToPDF() {
-    const element = document.querySelector("body");
-    html2pdf().set({
-        pagebreak: {
-            after: "[id*=\"ab-\"]"
-        }
-    }).from(element).save();
+    const element = document.querySelector("html");
+    html2pdf().from(element).save();
 }
 
 document.querySelector("#save-document").addEventListener("click", printToPDF);

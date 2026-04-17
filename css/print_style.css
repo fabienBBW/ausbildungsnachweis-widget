@@ -46,3 +46,7 @@ body {
 #ausbildungsnachweise div {
     margin: 1em;
 }
+
+[id*="ab-"] {
+    break-after: page;
+}
