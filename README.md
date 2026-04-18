@@ -1,5 +1,6 @@
 # ausbildungsnachweis-widget
 [![language](https://img.shields.io/badge/language-JS-blue?logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![language](https://img.shields.io/badge/language-HTML-blue?logo=html)]()
 
 - ./html: HTML source files.
 - ./js: JS source files.
