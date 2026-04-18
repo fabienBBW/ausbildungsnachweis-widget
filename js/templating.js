@@ -42,6 +42,17 @@ async function convert() {
     document.querySelector("#pe-date-of-birth").innerText = "17.12.2000";
     document.querySelector("#pe-address").innerText = "Berliner Straße 63, 61118";
     const weeks = await Week.getAll();
+    // Create table of contents.
+    for (const [i] of weeks.entries()) {
+        const html = `
+            <div>
+                Ausbildungsnachweis ${i + 1}
+            </div>
+        `;
+        document.querySelector("#toc").insertAdjacentHTML("beforeend", html);
+    }
+    // Insert content of individual days and weeks
+    // into the html template.
     for (const [i, week] of weeks.entries()) {
         const days = await Day.fromCW(week.week_cw);
         const dateRange = generateDateRange((week.week_cw.toString()).substring(0, 2), (week.week_cw.toString()).substring(2));
@@ -126,8 +137,7 @@ Schulungen, Themen des Berufsschulunterrichts
 convert();
 
 // Print to PDF with html2pdf JS library.
-// Add page breaks after each week and before the
-// listing of the first week.
+// Add page breaks.
 // This library seems to not be working properly.
 // Let's add CSS rules for page breaks and print with the
 // browser's built-in "Print to PDF".
@@ -135,5 +145,3 @@ function printToPDF() {
     const element = document.querySelector("html");
     html2pdf().from(element).save();
 }
-
-document.querySelector("#save-document").addEventListener("click", printToPDF);

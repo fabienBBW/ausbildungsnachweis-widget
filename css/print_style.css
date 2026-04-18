@@ -13,12 +13,7 @@ td, th {
 
 body {
     font-family: Arial;
-    font-size: 1vw;
-}
-
-#page-number {
-    position: absolute;
-    right: 10vw;
+    font-size: 1.5em;
 }
 
 #details-personals {
