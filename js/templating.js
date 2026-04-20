@@ -125,7 +125,7 @@ Schulungen, Themen des Berufsschulunterrichts
                         ${dayDate.toLocaleDateString("de-DE", {weekday: "long"})}
                     </td>
                     <td>
-                        ${day.day_activities_json}
+                        ${mdToHTML(JSON.parse(day.day_activities_json)[0])}
                     </td>
                 </tr>
             `;
@@ -145,3 +145,11 @@ function printToPDF() {
     const element = document.querySelector("html");
     html2pdf().from(element).save();
 }
+
+
+// Convert markdown to HTML with
+// marked. (https://github.com/markedjs/marked)
+function mdToHTML(md_in) {
+    const html = marked.parse(md_in);
+    return html;
+} 
