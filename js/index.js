@@ -257,7 +257,7 @@ function inputCustomKWGoTo() {
 
 function setCurrentDay(timestamp) {
     const date = new Date(timestamp * 1000);
-    const dateStr = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+    const dateStr = `${date.toLocaleDateString("de-DE", {weekday: "long"})}, ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     document.querySelector("#current-day-text").innerText = `${dateStr}`;
 }
 
