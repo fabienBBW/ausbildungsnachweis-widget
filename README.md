@@ -4,8 +4,8 @@
 [![language](https://img.shields.io/badge/language-PHP-blue?logo=php)](https://www.php.net/)
 [![language](https://img.shields.io/badge/language-CSS-blue?logo=css)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-![index.html page screenshot](https://ibb.co/mmGghFp)
-![export PDF screenshot](https://ibb.co/gbPwSjY0)
+![index.html page screenshot](https://i.ibb.co/DP8k9VdB/index-html.jpg)
+![export PDF screenshot](https://i.ibb.co/S2PGV7S/template-ausbildungsnachweis.jpg)
 
 ## Table of Contents  
 - [About](#-about)
