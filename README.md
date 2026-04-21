@@ -23,22 +23,18 @@ To run this development version of the widget, you have to have XAMPP installed 
 
 ## Getting Started
 1. Make sure you have XAMPP installed in c:/xampp.
-2. Copy the source files over to your XAMPP home:
+2. Download the repo, initialize the user for the database and create the tables for the database: 
 ```shell
 git clone https://github.com/fabienBBW/ausbildungsnachweis-widget.git
 cd ausbildungsnachweis-widget/build
+./db_init.ps1
+```
+2. Copy the source files over to your XAMPP home:
+```shell
 ./copy.ps1
 ```
-3. Start XAMPP Control Panel and start Apache and MySQL.
-4. Create a new user in mysql "ausbildungsnachweis-widget" and give it the password "600degrees".
-5. Create a new database called "ausbildungsnachweis".
-6. Give the user "ausbildungsnachweis-widget" full privileges over the "ausbildungsnachweis" database.
-7. Head over to [Seed DB](http://localhost/ausbildungsnachweis-widget/php/seed_db.php)
-8. Create the weeks and days DB.
-9. You are ready to use the widget! Go to the index page: [index.html](http://localhost/ausbildungsnachweis-widget/html/index.html).
+3. You are ready to use the widget! Go to the index page: [index.html](http://localhost/ausbildungsnachweis-widget/html/index.html).
 
-TO-DO:  
-(The current setup steps will be replaced by a script in the future).
 
 ## Directory Structure
 - ./html: HTML source files.
