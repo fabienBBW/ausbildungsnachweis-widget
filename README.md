@@ -4,9 +4,9 @@
 [![language](https://img.shields.io/badge/language-PHP-blue?logo=php)](https://www.php.net/)
 [![language](https://img.shields.io/badge/language-CSS-blue?logo=css)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-![index.html page screenshot](https://i.postimg.cc/nh4b0HGY/index-html-1-iphone.jpg)
-![index.html page screenshot](https://i.postimg.cc/vZrF3Qt7/index-html-2-iphone.jpg)
-![index.html page screenshot](https://i.postimg.cc/Sx6FDyfW/index-html-3-iphone.jpg)
+![index.html page screenshot](https://i.postimg.cc/nh4b0HGY/index-html-1-iphone.jpg)  
+![index.html page screenshot](https://i.postimg.cc/vZrF3Qt7/index-html-2-iphone.jpg)  
+![index.html page screenshot](https://i.postimg.cc/Sx6FDyfW/index-html-3-iphone.jpg)  
 ![export PDF screenshot](https://i.ibb.co/S2PGV7S/template-ausbildungsnachweis.jpg)
 
 ## Table of Contents  
